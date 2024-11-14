@@ -103,10 +103,10 @@
 								<tr>
 									<td>좋아하는 음식</td>
 									<td>
-										<label> 한식 <input type="checkbox" name="uFood" value="인터넷"></label>
-										<label> 중식 <input type="checkbox" name="uFood" value="여행"></label>
-										<label> 일식 <input type="checkbox" name="uFood" value="게임"></label>
-										<label> 양식 <input type="checkbox" name="uFood" value="영화"></label>
+										<label> 한식 <input type="checkbox" name="uFood" value="한식"></label>
+										<label> 중식 <input type="checkbox" name="uFood" value="중식"></label>
+										<label> 일식 <input type="checkbox" name="uFood" value="일식"></label>
+										<label> 양식 <input type="checkbox" name="uFood" value="양식"></label>
 									</td>
 									<td></td>
 								</tr>

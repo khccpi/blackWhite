@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -47,10 +48,10 @@ public class MemberMgr {
         }
         return res;
     }
-    /* 아이디 중복 검사 끝(/login&Join/idCheck.jsp) */
+    /* 아이디 중복 검사 끝 */
     
     
-    /* 우편번호 찾기 시작(/login&Join/zipCheck.jsp) */
+    /* 우편번호 찾기 시작 */
     public List<ZipcodeBean> zipcodeRead(String area3) {
         List<ZipcodeBean> objList = new Vector<>();
         try {
@@ -80,7 +81,7 @@ public class MemberMgr {
         }
         return objList;
     }
-    /* 우편번호 찾기 끝(/login&Join/zipCheck.jsp) */
+    /* 우편번호 찾기 끝 */
 
     /* 회원가입 시작  */
     public boolean insertMember(MemberBean bean) {
@@ -111,11 +112,6 @@ public class MemberMgr {
                     }
                 }
             }
-            // char[] => hobbyCode => {'0', '1', '1', '0', '1'}  j:1,2,4
-            // char[] 변수a => new String(변수a);
-            // => char[] 자료형이 String 자료형으로 변경됨
-            // {'0', '1', '1', '0', '1'} => new String( ) => "01101"
-            // String[] 변수b => new String(변수b); (X)
             pstmt.setString(9, new String(foodCode));
             pstmt.setString(10, bean.getuJob());
             
@@ -133,9 +129,9 @@ public class MemberMgr {
         }
         return flag;
     }
-    /* 회원가입 끝 (/member/memberProc.jsp) */
+    /* 회원가입 끝 */
 
-    /* 로그인 처리 시작 (/member/loginProc.jsp) */
+    /* 로그인 처리 시작 */
     public boolean loginMember(String id, String pw) {
         boolean loginChkTF = false;
         try {
@@ -160,9 +156,9 @@ public class MemberMgr {
         }
         return loginChkTF;
     }
-    /* 로그인 처리 끝 (/member/loginProc.jsp) */
+    /* 로그인 처리 끝 */
 
-    /* 회원정보 수정 시작 (/member/memberModProc.jsp) */
+    /* 회원정보 수정 시작 */
     public MemberBean modifyMember(String id) {
         MemberBean mBean = new MemberBean();
 
@@ -204,8 +200,8 @@ public class MemberMgr {
         return mBean;
     }
 
-    /* 회원정보 수정 끝 (/member/memberModProc.jsp) */
-    /* 로그인 사용자 이름 반환(/bbs/write.jsp) 시작 */
+    /* 회원정보 수정 끝 */
+    /* 로그인 사용자 이름 반환 시작 */
     public String getMemberName(String uId) {
         String uName = "";
         String sql = null;
@@ -229,5 +225,58 @@ public class MemberMgr {
         }
         return uName;
     }
-    /* 로그인 사용자 이름 반환(/bbs/write.jsp) 끝 */
+    /* 로그인 사용자 이름 반환 끝 */
+    
+    /* 조회 */
+    public List<MemberBean> getMemSelect(String uId) {
+        
+        List<MemberBean> list = new ArrayList<>();
+        MemberBean memberBean = null;
+        String sql = null;
+        
+        try {
+            conn = dbcp.mtdConn();
+            sql = "select * from userList where uId=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, uId);
+            objRS = pstmt.executeQuery();
+            
+            while(objRS.next()) {
+                memberBean = new MemberBean();
+                memberBean.setuId(objRS.getString("uId"));
+                memberBean.setuPw(objRS.getString("uPw"));
+                memberBean.setuName(objRS.getString("uName"));
+                memberBean.setuEmail(objRS.getString("uEmail"));
+                memberBean.setGender(objRS.getString("gender"));
+                memberBean.setuBirth(objRS.getString("uBirth"));
+                memberBean.setuZipcode(objRS.getString("uZipcode"));
+                memberBean.setuAddr(objRS.getString("uAddr"));
+                
+                String[] foodAry = new String[4];
+                String[] foodName = {"한식","중식","일식","양식"};
+                String food = objRS.getString("uFood");
+                foodAry = food.split("");
+                for(int i=0; i < foodAry.length ; i++) {
+                    if(foodAry[i].equals("1")) {
+                        foodAry[i] = foodName[i];
+                    }
+                }
+                memberBean.setuFood(foodAry);
+
+                memberBean.setuJob(objRS.getString("uJob"));
+                
+                list.add(memberBean);
+            }
+        } catch (Exception e) {
+            System.out.print("오류발생  :   " + e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return list;
+    }
+    /* 조회 끝 */
 }

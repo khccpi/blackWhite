@@ -110,17 +110,23 @@ ul#mainMenu li.subLi:hover {
 
 #left {
   width: 250px;
-  height: 500px;
+  height: 250px;
   margin-left: 20px;
   margin-right: 25px;
   border: 1px solid black;
 }
 
-#left > ul > li {
+#lefTop {
+  height: 200px;
+  padding : 0;
+  margin : 0;
+}
+
+#left > #lefTop > ul > li {
   padding-left: 10px;
 }
 
-#left h4 {
+#left > #lefTop >h4 {
   color: #fff;
   font-size: 18px;
   padding: 10px 5px;
@@ -132,7 +138,7 @@ ul#mainMenu li.subLi:hover {
   color: #fff;
   font-size: 18px;
   margin-left: 80px;
-  transform: translateY(340px);
+  transform: translateY(5px);
   background-color: #7c7c7c;
   border: none;
   padding: 6px;
@@ -140,6 +146,13 @@ ul#mainMenu li.subLi:hover {
 
 #logout:hover {
 	cursor : pointer;
+}
+
+#banner {
+  width: 250px;
+  height: 293px;
+  border: 1px solid black;
+  transform: translateY(20px);
 }
 /* main_left 끝 */
 
