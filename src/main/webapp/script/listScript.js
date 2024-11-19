@@ -38,4 +38,5 @@ $(function() {
 		$("#contents3").css("display","none");
 		$("#contents4").css("display","flex");
 	})
+	
 });

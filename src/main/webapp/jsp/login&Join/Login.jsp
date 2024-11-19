@@ -7,6 +7,7 @@
 <title>로그인 페이지</title>
 <link rel="stylesheet" href="/style/loginStyle.css?v">
 </head>
+<% session.invalidate(); %>
 <body>
 	<div id="wrap">
 		<h1>로그인 페이지</h1>
@@ -28,7 +29,6 @@
 			</form>
 		</div>
 	</div>
-
 	<script src="/script/jquery-3.7.1.min.js"></script>
 	<script src="/script/login&Join/loginScript.js"></script>
 </body>

@@ -34,4 +34,5 @@ $(function() {
 		alert("게스트로 입장하셨습니다.");
 		location.href="/jsp/List.jsp";
 	})
+		
 });

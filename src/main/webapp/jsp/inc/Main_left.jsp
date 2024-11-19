@@ -68,26 +68,94 @@
 			<button type="button" id="userUpdate">회원정보 수정</button>
 			<button type="button" id="logout">로그아웃</button>
 		</div>
-		<div id="banner">광고</div>
-	
+		<div id="banner">
+			<div id="ban1">
+	          <a href="http://www.naver.com">
+	            <img src="/images/adv/다이어트1.jpg" alt="다이어트1">
+	          </a>
+	          <a href="http://www.google.com">
+	            <img src="/images/adv/다이어트2.jpg" alt="다이어트2">
+	          </a>
+	          <a href="http://www.youtube.com/">
+	            <img src="/images/adv/다이어트3.jpg" alt="다이어트3">
+	          </a>
+			</div>
+			<div id="ban2">
+	          <a href="http://www.naver.com">
+	            <img src="/images/adv/다이어트4.jpg" alt="다이어트4">
+	          </a> 
+	          <a href="http://www.google.com">
+	            <img src="/images/adv/다이어트5.jpg" alt="다이어트5">
+	          </a>
+	          <a href="http://www.youtube.com/">
+	            <img src="/images/adv/다이어트6.jpg" alt="다이어트6">
+	          </a>
+			</div>
+			<div id="ban3">
+	          <a href="http://www.naver.com">
+	            <img src="/images/adv/다이어트7.jpg" alt="다이어트7">
+	          </a>
+	          <a href="http://www.google.com">
+	            <img src="/images/adv/다이어트8.jpg" alt="다이어트8">
+	          </a>
+	          <a href="http://www.youtube.com/">
+	            <img src="/images/adv/다이어트9.jpg" alt="다이어트9">
+	          </a>
+			</div>
+		</div>
 	</div>
 
 	<script src="/script/jquery-3.7.1.min.js"></script>
+	<!-- <script src="/script/login&Join/main_Left.js"></script> -->
 	<script>
-			$(function() {
-				// 회원정보 수정
-				$("#userUpdate").click(() => {
-					location.href="/jsp/login&Join/ModifyUser.jsp";
-					
-				})
-				
-				// 로그아웃
-				$("#logout").click(()=> {
-					alert("로그아웃 하셨습니다.");
-					<% session.invalidate();%>
-					location.href="/jsp/login&Join/Login.jsp";
-				})	
-			})
-		</script>
+		// 회원정보 수정
+		$("#userUpdate").click(() => {
+			<% if(sid == "" || sid == null) {%>
+				alert("회원만 수정하실 수 있습니다.");
+			<% } else { %>
+				alert("수정 페이지로 이동합니다.");
+				location.href="/jsp/login&Join/ModifyUser.jsp";
+			<% } %>
+		})
+		
+		// 로그아웃
+		$("#logout").click(()=> {
+			alert("로그아웃 하셨습니다.");
+			console.log("gd");
+			location.href="/jsp/login&Join/Login.jsp";
+		})
+		
+		// 배너
+		setInterval(bnSlide,5000);
+		function bnSlide() {
+			$("#ban1").animate(
+				{"margin-left":"-250px"},
+				1000,
+				function() {
+					$("#ban1>a:first-child").insertAfter("#ban1>a:last-child");
+					$("#ban1").css({"margin-left":"0px"});
+				}
+			)
+			
+			$("#ban2").animate(
+				{"margin-left":"-250px"},
+				1000,
+				function() {
+					$("#ban2>a:first-child").insertAfter("#ban2>a:last-child");
+					$("#ban2").css({"margin-left":"0px"});
+				}
+			)
+			
+			$("#ban3").animate(
+				{"margin-left":"-250px"},
+				1000,
+				function() {
+					$("#ban3>a:first-child").insertAfter("#ban3>a:last-child");
+					$("#ban3").css({"margin-left":"0px"});
+				}
+			)
+		}
+	</script>
+	
 </body>
 </html>

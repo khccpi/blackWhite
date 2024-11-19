@@ -163,10 +163,32 @@ ul#mainMenu li.subLi:hover {
 }
 
 #banner {
-  width: 250px;
-  height: 293px;
-  border: 1px solid black;
-  transform: translateY(20px);
+ 	width: 250px;
+ 	height: 292px;
+ 	border: 1px solid black;
+ 	transform: translateY(20px);
+ 	padding : 0;
+ 	overflow: hidden;
+}
+
+#ban1, #ban2, #ban3 {
+	width: 248px;
+	margin : 0;
+	padding : 0;
+	display: flex;
+}
+
+#ban1, #ban2 {
+	border-bottom : 1px solid #7c7c7c;	
+}
+
+a {
+	position: relative;
+}
+
+img {
+	width : 248px;
+	height : 96px;
 }
 /* main_left 끝 */
 
